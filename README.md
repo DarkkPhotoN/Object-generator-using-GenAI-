@@ -1,5 +1,7 @@
 # Sky-Rim
 
+Disclaimer : It takes time to run the html file so please wait ...
+
 Input for the Project
 
 1. Cold Drink to refresh in summer. Budget friendly and easily accessible. Tastes in different flavours and comes in a tin can .
