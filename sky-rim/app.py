@@ -3,6 +3,9 @@ import requests
 import json
 app = Flask(__name__)
 
+# Input
+# Cold Drink to refresh in summer. Budget friendly and easily accessible. Tastes in different flavours and comes in a tin can .
+
 
 @app.route('/', methods=['GET', 'POST'])
 def index():
@@ -13,11 +16,11 @@ def index():
 
         prompout = prompt(text)
 
-        print(prompout)
-
         image = ImageGeneration(prompout)
 
-        return render_template('index.html', sum=sum, image=image)
+        name = pname(sum)
+
+        return render_template('index.html', name=name, image=image, sum=sum)
 
     else:
         return render_template('index.html')
@@ -33,7 +36,7 @@ def summarize(itext):
     }
 
     response = requests.post(api_url1, json=params1)
-    output = json.loads(response.text)
+    output = json.loads(response.text)["output"]
     return output
 
 
@@ -60,9 +63,19 @@ def ImageGeneration(prompto):
         "n_images": 1
     }
     response = requests.post(api_url, json=params)
-    print(response.text)
     output = json.loads(response.text)["output"]
-    print(output)
+
+    return output
+
+
+def pname(sum):
+    api_url = "https://v1.genr.ai/api/circuit-element/generate-product-name"
+    params3 = {"product_description": sum,
+               "temperature": 0.8, "keywords": "useful"}
+
+    pname = requests.post(api_url, json=params3)
+    output = json.loads(pname.text)["output"]
+
     return output
 
 
